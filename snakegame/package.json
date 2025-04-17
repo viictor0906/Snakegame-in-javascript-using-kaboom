@@ -9,6 +9,6 @@
 		"kaboom": "^3000.1.17"
 	},
 	"devDependencies": {
-		"esbuild": "^0.25.1"
+		"esbuild": "^0.25.2"
 	}
 }
