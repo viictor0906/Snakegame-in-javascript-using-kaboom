@@ -13,7 +13,7 @@ kaboom();
 //End.
 
 //Loading sprites for game.
-    k.loadSprite("player", "sprites/bean.png");
+    k.loadSprite("player", "sprites/jj.png");
     k.loadSprite("apple", "sprites/apple.png");
 //End.
 
@@ -48,6 +48,7 @@ kaboom();
 //Score att rotine and change player spped for each apple eated.
     let score = add([//Created for show score text in screen.
         k.text("Score: 0"),
+        k.color(0,0,0,0),
         k.pos(24,24),
         { value:0}//Score value, this variable will be increased.
     ]);
@@ -55,6 +56,9 @@ kaboom();
     player.onCollide("apple", (apple) => {
         k.destroy(apple);
         spawnApple();
+
+        //k.addKaboom(player.pos);
+        k.shake();
 
         score.value+=1;
         score.text="Score: " + score.value;
@@ -90,7 +94,7 @@ kaboom();
 //End.
 
 //Update player movement, frame by frame.
-    onUpdate(() => {
+    k.onUpdate(() => {
         //Temporary array for save actual snake position.
         const previousPositions = [];
         //Saving actual snake head position. player.pos.clone() make's a copy of snake head for avoid change original value.
@@ -101,7 +105,9 @@ kaboom();
             //Clone position of item in array for previousPositions.
             previousPositions.push(snakeBody[i].pos.clone());
         };
+        //End.
 
+        //Change player movement direction.
         switch (player.currentDir) {
             case "up":
                 player.pos.y -= player.speed * dt() //dt() is the time since the last frame, used so that the speed is consistent even with different FPS rates.
@@ -116,19 +122,38 @@ kaboom();
                 player.pos.x += player.speed * dt()
                 break;
         };
+        //End.
         
         //It causes each segment of the body to move to the previous position of the segment in front. Example: segment 1 go to snake head position previous, segment 2 go to where the segment 1 was.
         for(let i = 0; i < snakeBody.length; i++){
             snakeBody[i].pos = previousPositions[i];
         };
+        //End.
     });
 //End.
+    k.onUpdate(() => {
+    //Makes collision system to check if the snake touch screen edge, if yes, turn back.
+        if(player.pos.x < 0) {
+            player.currentDir = "right";
+        }
+        if(player.pos.x > 740) {
+            player.currentDir = "left";
+        }
+        if(player.pos.y < 0) {
+            player.currentDir = "down";
+        }
+        if(player.pos.y > 520) {
+            player.currentDir = "up";
+        };
+    });
+    //End.
 
-//Call the function for spawn first apple.
-    spawnApple();
-//End.
+    //Call the function for spawn first apple.
+        spawnApple();
+    //End.
 
 });
 
 //Run game again.
 go("game");
+//End.
