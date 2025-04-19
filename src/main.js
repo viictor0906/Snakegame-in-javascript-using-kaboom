@@ -1,59 +1,61 @@
 import kaboom from "kaboom"
 
-kaboom();
+kaboom(); //Start lib.
 
 //Setting screen config and defining "k" as a 'get' of kaboom lib.
     const k = kaboom({
-        width:800,
-        height:600,
-        scale:1,
-        stretch:false,
-        letterbox: true
+        width:800, //x
+        height:600, //y
+        stretch:false, //Define if screen game gonna stretch with screen size values. 
+        letterbox:true //Create edges on screen size rounded, put the corners on the middle.
     });
 //End.
 
 //Loading sprites for game.
-    k.loadSprite("player", "sprites/jj.png");
-    k.loadSprite("apple", "sprites/apple.png");
+    playerSprite = k.loadSprite("player","sprites/jj.png");
+    candySprite = k.loadSprite("apple","sprites/apple.png");
 //End.
 
 //Defining game scene and start real game programming.
-    k.scene("game", () => {
+    k.scene("game",() => {
+        //Player is let beacause your values his change in others code block's.
         let player = add([
-            k.sprite("player"),
+            k.sprite(playerSprite),
             k.pos(center()),
-            k.area(),
+            k.area(), //Setup object collison.
             k.body(),
             {
                 speed:200,
                 currentDir:"up"
             },
-            "snake-head"
+            "snake-head" //Tag to call the object more easily.
         ]);
 //End.
 
-    let snakeBody = [];
+    //Snake body array for make body size increment.
+        let snakeBody = [];
+    //End.
 
 //Function will be spawn random apples in the map.
     function spawnApple(){
         k.add([
-            k.sprite("apple"),
-            k.pos(rand(100,700), rand(100,500)),//Defining random position for each spawned.
-            k.area(),//Defining area for future collisions.
-            "apple"//Declared a tag for apple object.
+            k.sprite(candySprite),
+            k.pos(rand(100,700), rand(100,500)), //Defining random position for each spawned.
+            k.area(),
+            "apple"
         ]);
     };
 //End.
 
 //Score att rotine and change player spped for each apple eated.
-    let score = add([//Created for show score text in screen.
-        k.text("Score: 0"),
+    let score = add([ //Created for show score text in screen.
+        k.text("Score:0"),
         k.color(0,0,0,0),
         k.pos(24,24),
-        { value:0}//Score value, this variable will be increased.
+        {value:0} //Score value, this variable will be increased.
     ]);
 
-    player.onCollide("apple", (apple) => {
+    player.onCollide("apple",(apple) => {
         k.destroy(apple);
         spawnApple();
 
@@ -61,12 +63,12 @@ kaboom();
         k.shake();
 
         score.value+=1;
-        score.text="Score: " + score.value;
+        score.text="Score:"+score.value;
 
         player.speed+=10;
 
         //Verify if snakebody have any segment. If yes(snakeBody.length > 0), pick the last body segment(snakeBody[snakeBody.length - 1]). If no, use the snake head with reference. On resume, if snake have body, use the last segment with parameter, if no have body, use the snake head with parameter.
-        const lastSegment = snakeBody.length > 0 ? snakeBody[snakeBody.length - 1]: player;
+        const lastSegment = snakeBody.length > 0 ? snakeBody[snakeBody.length-1]: player;
         const newSegment = add([
             k.sprite("player"),
             k.pos(lastSegment.pos),
@@ -101,7 +103,7 @@ kaboom();
         previousPositions.push(player.pos.clone());
 
         //Saving each snake body piece.
-        for(let i = 0; i < snakeBody.length; i++){
+        for(let i=0; i<snakeBody.length; i++){
             //Clone position of item in array for previousPositions.
             previousPositions.push(snakeBody[i].pos.clone());
         };
@@ -125,7 +127,7 @@ kaboom();
         //End.
         
         //It causes each segment of the body to move to the previous position of the segment in front. Example: segment 1 go to snake head position previous, segment 2 go to where the segment 1 was.
-        for(let i = 0; i < snakeBody.length; i++){
+        for(let i=0; i<snakeBody.length; i++){
             snakeBody[i].pos = previousPositions[i];
         };
         //End.
@@ -133,17 +135,19 @@ kaboom();
 //End.
     k.onUpdate(() => {
     //Makes collision system to check if the snake touch screen edge, if yes, turn back.
-        if(player.pos.x < 0) {
-            player.currentDir = "right";
+        //0 is the inicial position of screen limit, it's work to height too.
+        if(player.pos.x<0) {
+            player.currentDir="right";
         }
-        if(player.pos.x > 740) {
-            player.currentDir = "left";
+        //Final limit of screen, it's work to height too.
+        if(player.pos.x>740) {
+            player.currentDir="left";
         }
-        if(player.pos.y < 0) {
-            player.currentDir = "down";
+        if(player.pos.y<0) {
+            player.currentDir="down";
         }
-        if(player.pos.y > 520) {
-            player.currentDir = "up";
+        if(player.pos.y>550) {
+            player.currentDir="up";
         };
     });
     //End.
@@ -154,6 +158,6 @@ kaboom();
 
 });
 
-//Run game again.
-go("game");
-//End.
+    //Run game again.
+        go("game");
+    //End.
