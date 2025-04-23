@@ -14,14 +14,18 @@
 //Loading sprites.
     const playerSprite=k.loadSprite("player","sprites/Chrome.png");
     const candySprite=k.loadSprite("candy","sprites/Ram.png");
-    const gameBackground=k.loadSprite("gameBackground","sprites/surface.png")
+    const gameBackgroundSprite=k.loadSprite("gameBackground","sprites/surface.png");
+    const snakeTitleSprite=k.loadSprite("snakeTitleSprite","sprites/snakeTitle.png");
+    const startTextSprite=k.loadSprite("startTextSprite","sprites/startText.png");
+    const gameOverTextSprite=k.loadSprite("gameOverTextSprite","sprites/gameOverText.png");
+    const retryTextSprite=k.loadSprite("retryTextSprite","sprite/retryTextSprite.png");
 //End.
 
 //Defining game scene and start mechanic game programming.
     k.scene("game",()=>{
         //Setup background color.
             k.add([
-                k.sprite(gameBackground),
+                k.sprite(gameBackgroundSprite),
                 k.pos(0,0),
                 k.scale(1.4),
                 "background"
@@ -205,6 +209,20 @@
                 ]);
 
                 k.add([
+                    k.sprite(snakeTitleSprite),
+                    k.pos(300,250),
+                    "snake-game-title"
+                ]);
+
+                k.add([
+                    k.sprite(startTextSprite),
+                    k.pos(150,300),
+                    "start-text"
+                ]);
+
+
+
+                k.add([
                     k.text("Snake Game!"),
                     k.color(rgb(0,0,0)),
                     k.pos(300,250),
@@ -216,7 +234,7 @@
                     k.color(rgb(255,0,0)),
                     k.pos(150,300),
                     retryGame(),
-                    "retry-game"
+                    "start-game"
                 ]);
             });
         //End.
@@ -229,6 +247,21 @@
                     //k.color(rgb(46,139,87)),
                     "background-game-over"
                 ]);
+
+                k.add([
+                    k.sprite(gameOverTextSprite),
+                    k.pos(300,250),
+                    "game-over-sprite"
+                ]);
+
+                k.add([
+                    k.sprite(retryTextSprite),
+                    k.pos(150,300),
+                    retryGame(), //Call retryGame function.
+                    "retry-text-sprite"
+                ]);
+
+
 
                 k.add([
                     k.text("Game Over!"),
