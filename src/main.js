@@ -14,7 +14,8 @@
 //Loading sprites.
     const playerSprite=k.loadSprite("player","sprites/Chrome.png");
     const candySprite=k.loadSprite("candy","sprites/Ram.png");
-    const gameBackground=k.loadSprite("gameBackground","sprites/surface.png")
+    const gameBackground=k.loadSprite("gameBackground","sprites/surface.png");
+const maiMenuSprite=k.loadSprite("mainMenuSprite","sprites/mainMenuText.png");
 //End.
 
 //Defining game scene and start mechanic game programming.
@@ -253,6 +254,8 @@
                 })
             };
         //End.
+
+            
     
     //Start on main menu scene.
         go("main-menu");
