@@ -202,7 +202,7 @@
         //Main menu before start game.
             k.scene("main-menu",()=>{
                 k.add([
-                    k.sprite(gameBackground),
+                    k.sprite(gameBackgroundSprite),
                     k.scale(1.4),
                     //k.color(rgb(46,139,87)),
                     "main-menu-background"
@@ -242,7 +242,7 @@
         //Game over scene, used when player collide with snake body after 30th segment.
             k.scene("game-over",()=>{
                 k.add([
-                    k.sprite(gameBackground), 
+                    k.sprite(gameBackgroundSprite), 
                     k.scale(1.4),
                     //k.color(rgb(46,139,87)),
                     "background-game-over"
