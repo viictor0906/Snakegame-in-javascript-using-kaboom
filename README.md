@@ -32,4 +32,5 @@ The game have three different scenes.
 - **MAIN MENU**
 - **GAMEPLAY**
 - **GAME OVER**
+
 By default, the game will start on **MAIN MENU** scene, press SPACE, as stated in the text below the title, to start game. And press SPACE on **GAME OVER** scene to retry game.
