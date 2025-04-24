@@ -131,7 +131,7 @@
         //Update game for each frame and action in game. I'm unique all mechanics what need update by frame in just one 'onUpdate' for best organize and less redundacy, because all this things use onUpdate, so, use just one work's normarly.
             k.onUpdate(()=>{
                 //Update player movement, frame by frame.
-                    //Temporary array for save actual snake position.
+                    //Temporary array for save actual player position.
                         const previousPosition=[];
 
 
@@ -197,7 +197,7 @@
              
 
                 //Rotine to check collision between player and snake body array.
-                    for(let i=20;i<snakeBody.length;i++){ //i=30 for check after snake body get big, because if i=0, will always check, as they are very close.
+                    for(let i=20;i<snakeBody.length;i++){ //i=20 for check after snake body get big, because if i=0, will always check, as they are very close.
                         if(closePositions(player.pos,snakeBody[i].pos)){
                             go("game-over")
                         }
