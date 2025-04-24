@@ -1,5 +1,6 @@
 # Snake-Game made in JavaScript using Kaboom.js lib
 ![screenRecordGif](https://github.com/user-attachments/assets/2f946ab8-f174-4d4f-a887-ab2c85f401c3)
+
 This project was made for my college, i decided to use the **Kaboom.js** library in my first game project because it is easier to develop and focus only on the logic of the game.
 # Kaboom library
 Any information of how the **Kaboom.js** library work or how modify the code using this library, can be found on **Kaboom.js** site documentation: https://kaboomjs.com/
