@@ -15,10 +15,12 @@
     const playerSprite=k.loadSprite("player","sprites/Chrome.png");
     const candySprite=k.loadSprite("candy","sprites/Ram.png");
     const gameBackgroundSprite=k.loadSprite("gameBackground","sprites/surface.png");
-    const snakeTitleSprite=k.loadSprite("snakeTitleSprite","sprites/snakeTitle.png");
-    const startTextSprite=k.loadSprite("startTextSprite","sprites/startText.png");
-    const gameOverTextSprite=k.loadSprite("gameOverTextSprite","sprites/gameOverText.png");
-    const retryTextSprite=k.loadSprite("retryTextSprite","sprite/retryTextSprite.png");
+    const snakeTitleSprite=k.loadSprite("snakeTitleSprite","sprites/snakeTitleSprite.png");
+    const startTextSprite=k.loadSprite("startTextSprite","sprites/startTextSprite.png");
+    const gameOverTextSprite=k.loadSprite("gameOverTextSprite","sprites/gameOverTextSprite.png");
+    const retryTextSprite=k.loadSprite("retryTextSprite","sprites/retryTextSprite.png");
+    const scoreTextSprite=k.loadSprite("scoreTextSprite","sprites/scoreTextSprite.png");
+    const motivationTextSprite=k.loadSprite("motivationTextSprite","sprites/motivationTextSprite.png");
 //End.
 
 //Defining game scene and start mechanic game programming.
@@ -59,13 +61,19 @@
         //End.
 
         //Score att rotine and change player spped for each apple eated.
-            let score=add([ //Created for show score text in screen.
-                k.text("Score:0"),
-                k.color(rgb(0,0,0)),
-                k.scale(0.7),
-                k.pos(24,24),
+            k.add([
+                k.sprite(scoreTextSprite),
+                k.scale(0.3),
+                k.pos(-90,-90),
+            ]);
+
+            let score=add([  //Created for show number score text in screen.
+                k.text(""),
+                k.scale(1),
+                k.pos(180,22),
                 {value:0} //Score value, this variable will be increased.
             ]);
+
             //Verify collision between player and candy.
             player.onCollide("candy",(candy)=>{
                 k.destroy(candy); //Destroy object.
@@ -75,7 +83,7 @@
                     //k.shake();
 
                 score.value+=1; //Increase new value on score value variable.
-                score.text="Score:"+score.value; //Update text with new value.
+                score.text=""+score.value; //Update text with new value.
 
                 player.speed+=5; //Increases player speed value.
 
@@ -113,15 +121,7 @@
                 const spriteSize=32; //Variable to use as a parameter in the distance check.
                 return position1.dist(position2)<spriteSize; //This line will check distance between arg1 and arg2 and check if they are less spriteSize value variable. '.dist()' is from lib.
             };
-        //End.
-
-        //Rotine to check collision between player and snake body array.
-            for(let i=30;i<snakeBody.length;i++){ //i=30 for check after snake body get big, because if i=0, will always check, as they are very close.
-                if(closePositions(player.pos,snakeBody[i].pos)){
-                    go("game-over")
-                }
-            };
-        //End.
+        //End.   
 
         //Update game for each frame and action in game. I'm unique all mechanics what need update by frame in just one 'onUpdate' for best organize and less redundacy, because all this things use onUpdate, so, use just one work's normarly.
             k.onUpdate(()=>{
@@ -186,7 +186,7 @@
                 //End.
                 
                 //Rotine to check collision between player and snake body array.
-                    for(let i=30;i<snakeBody.length;i++){ //i=30 for check after snake body get big, because if i=0, will always check, as they are very close.
+                    for(let i=20;i<snakeBody.length;i++){ //i=30 for check after snake body get big, because if i=0, will always check, as they are very close.
                         if(closePositions(player.pos,snakeBody[i].pos)){
                             go("game-over")
                         }
@@ -202,39 +202,19 @@
         //Main menu before start game.
             k.scene("main-menu",()=>{
                 k.add([
-                    k.sprite(gameBackgroundSprite),
-                    k.scale(1.4),
-                    //k.color(rgb(46,139,87)),
-                    "main-menu-background"
-                ]);
-
-                k.add([
                     k.sprite(snakeTitleSprite),
-                    k.pos(300,250),
+                    k.scale(0.3),
+                    k.pos(150,140),
                     "snake-game-title"
                 ]);
 
                 k.add([
-                    k.sprite(startTextSprite),
-                    k.pos(150,300),
-                    "start-text"
-                ]);
-
-
-
-                k.add([
-                    k.text("Snake Game!"),
-                    k.color(rgb(0,0,0)),
-                    k.pos(300,250),
-                    "menu-title"
-                ]);
-
-                k.add([
-                    k.text("Press SPACE to Start Game!"),
+                    k.sprite(startTextSprite),  
+                    k.scale(0.5),
                     k.color(rgb(255,0,0)),
-                    k.pos(150,300),
+                    k.pos(-15,100),
                     retryGame(),
-                    "start-game"
+                    "start-text"
                 ]);
             });
         //End.
@@ -242,40 +222,26 @@
         //Game over scene, used when player collide with snake body after 30th segment.
             k.scene("game-over",()=>{
                 k.add([
-                    k.sprite(gameBackgroundSprite), 
-                    k.scale(1.4),
-                    //k.color(rgb(46,139,87)),
-                    "background-game-over"
-                ]);
-
-                k.add([
                     k.sprite(gameOverTextSprite),
-                    k.pos(300,250),
+                    k.scale(0.3),
+                    k.pos(150,100),
                     "game-over-sprite"
                 ]);
 
                 k.add([
                     k.sprite(retryTextSprite),
-                    k.pos(150,300),
+                    k.scale(0.5),
+                    k.color(rgb(255,0,0)),
+                    k.pos(20,100),
                     retryGame(), //Call retryGame function.
                     "retry-text-sprite"
                 ]);
 
-
-
                 k.add([
-                    k.text("Game Over!"),
-                    k.color(rgb(0,0,0)),
-                    k.pos(300,250),
-                    "game-over-text"
-                ]);
-
-                k.add([
-                    k.text("Press SPACE to retry game!"),
-                    k.color(rgb(255,0,0)),
-                    k.pos(150,300),
-                    retryGame(), //Call retryGame function.
-                    "retry-text"
+                    k.sprite(motivationTextSprite),
+                    k.scale(0.3),
+                    k.pos(160,370),
+                    "motivation-text-sprite"
                 ]);
             });
 
