@@ -15,7 +15,7 @@
 //Loading sprites.
     const playerSprite=k.loadSprite("player","sprites/chromeSprite.png");
     const candySprite=k.loadSprite("candy","sprites/Ram.png");
-    const gameBackgroundSprite=k.loadSprite("gameBackground","sprites/waterfall2.jpg");
+    const gameBackgroundSprite=k.loadSprite("gameBackground","sprites/waterfall.jpg");
     const snakeTitleSprite=k.loadSprite("snakeTitleSprite","sprites/snakeTitleSprite.png");
     const startTextSprite=k.loadSprite("startTextSprite","sprites/startTextSprite.png");
     const gameOverTextSprite=k.loadSprite("gameOverTextSprite","sprites/gameOverTextSprite.png");
