@@ -10,7 +10,7 @@ Any information of how the **Kaboom.js** library work or how modify the code usi
 # How to setup
 ```bash
 git clone https://github.com/viictor0906/Snakegame-made-in-js.git
-cd Snakegame-in-javascript-using-kaboom
+cd Snakegame-made-in-js
 npm run dev
 ```
 Will start a dev server at http://localhost:8000.
