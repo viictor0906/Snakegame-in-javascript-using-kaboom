@@ -9,7 +9,7 @@ Any information of how the **Kaboom.js** library work or how modify the code usi
 - `/www` - Distribution folder, contains `index.html` and assests on `/sprites` folder.
 # How to setup
 ```bash
-git clone https://github.com/viictor0906/Snakegame-in-javascript-using-kaboom.git
+git clone https://github.com/viictor0906/Snakegame-made-in-js.git
 cd Snakegame-in-javascript-using-kaboom
 npm run dev
 ```
